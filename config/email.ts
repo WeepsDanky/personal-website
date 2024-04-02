@@ -1,9 +1,7 @@
-import { env } from '~/env.mjs'
-
 export const emailConfig = {
-  from: env.NEXT_PUBLIC_SITE_EMAIL_FROM,
+  from: 'hi@marksun.co.uk',
   baseUrl:
-    env.VERCEL_ENV === 'production'
-      ? env.NEXT_PUBLIC_SITE_URL
+    process.env.VERCEL_ENV === 'production'
+      ? `https://marksun.co.uk`
       : 'http://localhost:3000',
 }
