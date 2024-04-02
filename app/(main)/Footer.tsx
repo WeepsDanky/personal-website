@@ -49,7 +49,7 @@ async function TotalPageViews() {
   if (env.VERCEL_ENV === 'production') {
     views = await redis.incr(kvKeys.totalPageViews)
   } else {
-    views = 345678
+    views = 5432
   }
 
   return (
