@@ -36,10 +36,10 @@ export default function CreateNewsletterPage() {
     const subscriberEmails = new Set([
       ...subs
         .filter((sub) => typeof sub.email === 'string' && sub.email.length > 0)
-        .map((sub) => sub.email!),
+        .map((sub) => sub.email),
     ])
 
-    await resend.sendEmail({
+    await resend.emails.send({
       subject: data.subject,
       from: emailConfig.from,
       to: 'hi@marksun.co.uk',
