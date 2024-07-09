@@ -2,6 +2,7 @@ import { Card, Text, TextInput, Title } from '@tremor/react'
 import { extendDateTime, parseDateTime } from '@zolplay/utils'
 import { lte } from 'drizzle-orm'
 import { redirect } from 'next/navigation'
+import { env } from 'process'
 import { z } from 'zod'
 
 import { Button } from '~/components/ui/Button'
@@ -42,7 +43,7 @@ export default function CreateNewsletterPage() {
     await resend.emails.send({
       subject: data.subject,
       from: emailConfig.from,
-      to: 'hi@marksun.co.uk',
+      to: env.SITE_NOTIFICATION_EMAIL_TO ?? [],
       reply_to: emailConfig.reply_to,
       bcc: Array.from(subscriberEmails),
       react: NewslettersTemplate({
