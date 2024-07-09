@@ -43,7 +43,7 @@ export default function CreateNewsletterPage() {
       subject: data.subject,
       from: emailConfig.from,
       to: 'hi@marksun.co.uk',
-      reply_to: emailConfig.from,
+      reply_to: emailConfig.reply_to,
       bcc: Array.from(subscriberEmails),
       react: NewslettersTemplate({
         subject: data.subject,
