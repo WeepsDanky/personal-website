@@ -9,7 +9,7 @@ import { SocialLink } from '~/components/links/SocialLink'
 function Developer() {
   return (
     <span className="group">
-      <span className="font-mono">&lt;</span>开发捏
+      <span className="font-mono">&lt;</span>新手开发者
       <span className="font-mono">/&gt;</span>
       <span className="invisible inline-flex text-zinc-300 before:content-['|'] group-hover:visible group-hover:animate-typing dark:text-zinc-500" />
     </span>
@@ -27,7 +27,7 @@ function Physicist() {
 function Dreamer() {
   return (
     <span className="group">
-      <span>空想家（未来的创始人）</span>
+      <span>空想家</span>
     </span>
   )
 }
@@ -74,7 +74,7 @@ export function Headline() {
         }}
       >
         <Balancer>
-          我是马克。我会在我的个人网站分享我的一些想法和作品。如果你想了解更多关于我的信息，可以四处看看，探索一下。
+          我是马克。我会在我的个人网站分享我的一些想法和作品。
         </Balancer>
       </motion.p>
       <motion.div
