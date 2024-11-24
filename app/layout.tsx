@@ -3,6 +3,7 @@ import './clerk.css'
 import './prism.css'
 
 import { ClerkProvider } from '@clerk/nextjs'
+import { GoogleTagManager } from '@next/third-parties/google'
 import { type Metadata } from 'next'
 
 import { ThemeProvider } from '~/app/(main)/ThemeProvider'
@@ -10,6 +11,7 @@ import { url } from '~/lib'
 import { zhCN } from '~/lib/clerkLocalizations'
 import { sansFont } from '~/lib/font'
 import { seo } from '~/lib/seo'
+
 
 export const metadata: Metadata = {
   metadataBase: seo.url,
@@ -73,6 +75,7 @@ export default function RootLayout({
         className={`${sansFont.variable} m-0 h-full p-0 font-sans antialiased`}
         suppressHydrationWarning
       >
+        <GoogleTagManager gtmId="G-YTGR38JKLX" />
         <body className="flex h-full flex-col">
           <ThemeProvider
             attribute="class"
