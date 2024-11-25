@@ -5,6 +5,7 @@ import './prism.css'
 import { ClerkProvider } from '@clerk/nextjs'
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { type Metadata } from 'next'
+import Script from 'next/script'
 
 import { ThemeProvider } from '~/app/(main)/ThemeProvider'
 import { url } from '~/lib'
@@ -68,6 +69,8 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const GA_TRACKING_ID = "G-YTGR38JKLX"; // Replace with your actual GA ID
+
   return (
     <ClerkProvider localization={zhCN}>
       <html
@@ -75,6 +78,25 @@ export default function RootLayout({
         className={`${sansFont.variable} m-0 h-full p-0 font-sans antialiased`}
         suppressHydrationWarning
       >
+        {/* Google Analytics */}
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${GA_TRACKING_ID}', {
+                page_path: window.location.pathname,
+              });
+            `,
+          }}
+        />
         <body className="flex h-full flex-col">
           <ThemeProvider
             attribute="class"
