@@ -3,7 +3,7 @@ import './clerk.css'
 import './prism.css'
 
 import { ClerkProvider } from '@clerk/nextjs'
-import { GoogleTagManager } from '@next/third-parties/google'
+import { GoogleAnalytics } from '@next/third-parties/google'
 import { type Metadata } from 'next'
 
 import { ThemeProvider } from '~/app/(main)/ThemeProvider'
@@ -75,7 +75,6 @@ export default function RootLayout({
         className={`${sansFont.variable} m-0 h-full p-0 font-sans antialiased`}
         suppressHydrationWarning
       >
-        <GoogleTagManager gtmId="G-YTGR38JKLX" />
         <body className="flex h-full flex-col">
           <ThemeProvider
             attribute="class"
@@ -86,6 +85,7 @@ export default function RootLayout({
             {children}
           </ThemeProvider>
         </body>
+        <GoogleAnalytics gaId="G-YTGR38JKLX" />
       </html>
     </ClerkProvider>
   )
