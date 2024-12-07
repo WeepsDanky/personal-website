@@ -34,10 +34,10 @@ const resume: Resume[] = [
   },
   {
     company: 'Dify.AI',
-    title: '开发者关系',
+    title: '开发者关系与创新',
     logo: DifyLogo,
     start: '2024年1月',
-    end: '至今',
+    end: '2024年11月',
   },
 ]
 
