@@ -20,6 +20,7 @@ const faviconMapper: { [key: string]: string } = {
   'coolshell.cn': 'https://cali.so/favicons/coolshell.png',
   'vercel.com': 'https://cali.so/favicons/vercel.png',
   'nextjs.org': 'https://cali.so/favicons/nextjs.png',
+  '(?:marksun.co.uk)': 'https://marksun.co.uk/favicon.ico'
 }
 
 function getPredefinedIconForUrl(url: string): string | undefined {

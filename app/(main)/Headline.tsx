@@ -9,7 +9,7 @@ import { SocialLink } from '~/components/links/SocialLink'
 function Developer() {
   return (
     <span className="group">
-      <span className="font-mono">&lt;</span>新手开发者
+      <span className="font-mono">&lt;</span>开发者
       <span className="font-mono">/&gt;</span>
       <span className="invisible inline-flex text-zinc-300 before:content-['|'] group-hover:visible group-hover:animate-typing dark:text-zinc-500" />
     </span>
@@ -19,15 +19,15 @@ function Developer() {
 function Physicist() {
   return (
     <span>
-      臭学物理的
+      学物理的
     </span>  
   )
 }
 
-function Dreamer() {
+function Founder() {
   return (
     <span className="group">
-      <span>空想家</span>
+      <span>创始人</span>
     </span>
   )
 }
@@ -59,7 +59,7 @@ export function Headline() {
       >
         <Developer />，<Physicist />，
         <br />
-        <Dreamer />
+        <Founder />
       </motion.h1>
       <motion.p
         className="mt-6 text-base text-zinc-600 dark:text-zinc-400"

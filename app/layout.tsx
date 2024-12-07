@@ -22,10 +22,6 @@ export const metadata: Metadata = {
   },
   description: seo.description,
   keywords: '马克孙,孙霄逸,物理,帝国理工,创始人,开发者',
-  themeColor: [
-    { media: '(prefers-color-scheme: dark)', color: '#000212' },
-    { media: '(prefers-color-scheme: light)', color: '#fafafa' },
-  ],
   manifest: '/site.webmanifest',
   robots: {
     index: true,
@@ -63,6 +59,17 @@ export const metadata: Metadata = {
     },
   },
 }
+
+export const viewport = {
+  themeColor: [
+    { media: '(prefers-color-scheme: dark)', color: '#000212' },
+    { media: '(prefers-color-scheme: light)', color: '#fafafa' },
+  ],
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: 0,
+};
 
 export default function RootLayout({
   children,
