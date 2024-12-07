@@ -113,6 +113,19 @@ export default defineType({
         layout: 'radio',
       },
     }),
+    defineField({
+      name: 'language',
+      title: '语言',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'English', value: 'en' },
+          { title: 'Chinese', value: 'zh' },
+        ],
+        layout: 'radio',
+      },
+      validation: (Rule) => Rule.required(),
+    }),
   ],
 
   initialValue: () => ({
