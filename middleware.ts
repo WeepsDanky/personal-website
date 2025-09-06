@@ -68,5 +68,6 @@ export default authMiddleware({
     '/feed',
     '/ama',
     '/daynight-sounds',
+    '/daynight-sounds/privacy-policy',
   ],
 })
