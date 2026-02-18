@@ -431,11 +431,11 @@ export const zhCN = {
       },
     },
     passwordPage: {
-      title: '设置密码',
-      changePasswordTitle: '更改密码',
-      successMessage: '您的密码已设置。',
-      changePasswordSuccessMessage: '您的密码已更新。',
-      sessionsSignedOutSuccessMessage: '所有其他设备已退出。',
+      title__set: '设置密码',
+      title__update: '更改密码',
+      successMessage__set: '您的密码已设置。',
+      successMessage__update: '您的密码已更新。',
+      successMessage__signOutOfOtherSessions: '所有其他设备已退出。',
     },
     mfaPage: {
       title: '添加两步验证',

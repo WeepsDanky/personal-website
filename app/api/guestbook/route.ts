@@ -1,8 +1,9 @@
-import { currentUser } from '@clerk/nextjs'
+import { currentUser } from '@clerk/nextjs/server'
 import { type NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 
 import { emailConfig } from '~/config/email'
+import { getIP } from '~/lib/ip'
 import { db } from '~/db'
 import { type GuestbookDto, GuestbookHashids } from '~/db/dto/guestbook.dto'
 import { fetchGuestbookMessages } from '~/db/queries/guestbook'
@@ -19,7 +20,7 @@ function getKey(id?: string) {
 
 export async function GET(req: NextRequest) {
   try {
-    const { success } = await ratelimit.limit(getKey(req.ip ?? ''))
+    const { success } = await ratelimit.limit(getKey(getIP(req)))
     if (!success) {
       return new Response('Too Many Requests', {
         status: 429,

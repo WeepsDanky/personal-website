@@ -18,7 +18,7 @@ export function Guestbook(props: { messages?: GuestbookDto[] }) {
   return (
     <section className="max-w-2xl">
       <SignedOut>
-        <SignInButton mode="modal" redirectUrl={url(pathname).href}>
+        <SignInButton mode="modal" forceRedirectUrl={url(pathname).href}>
           <Button type="button">
             <UserArrowLeftIcon className="mr-1 h-5 w-5" />
             登录后才可以留言噢

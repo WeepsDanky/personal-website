@@ -1,3 +1,5 @@
+@reference "tailwindcss";
+
 .prismjs {
   --tw-prose-pre-bg: rgba(245, 245, 245, .05);
   --tw-prose-pre-code: theme('colors.zinc.600');
@@ -11,7 +13,7 @@
   @apply rounded-t-3xl;
 }
 
-@screen md {
+@media (min-width: 768px) {
   .prismjs {
     font-size: 0.875rem;
     padding: 1.5rem;

@@ -1,4 +1,4 @@
-import { authMiddleware } from '@clerk/nextjs'
+import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
 import { get } from '@vercel/edge-config'
 import { type NextRequest, NextResponse } from 'next/server'
 
@@ -12,8 +12,26 @@ export const config = {
   matcher: ['/((?!_next|studio|.*\\..*).*)'],
 }
 
-async function beforeAuthMiddleware(req: NextRequest) {
-  const { geo, nextUrl } = req
+const isPublicRoute = createRouteMatcher([
+  '/',
+  '/studio(.*)',
+  '/api(.*)',
+  '/blog(.*)',
+  '/confirm(.*)',
+  '/projects',
+  '/guestbook',
+  '/newsletters(.*)',
+  '/about',
+  '/rss',
+  '/feed',
+  '/ama',
+  '/daynight-sounds',
+  '/daynight-sounds/privacy-policy',
+  '/91',
+])
+
+export default clerkMiddleware(async (auth, req: NextRequest) => {
+  const { nextUrl } = req
   const isApi = nextUrl.pathname.startsWith('/api/')
 
   if (process.env.EDGE_CONFIG) {
@@ -38,37 +56,22 @@ async function beforeAuthMiddleware(req: NextRequest) {
     }
   }
 
-  if (geo && !isApi && env.VERCEL_ENV === 'production') {
-    const country = geo.country
-    const city = geo.city
+  const geoCountry = req.headers.get('x-vercel-ip-country')
+  const geoCity = req.headers.get('x-vercel-ip-city')
 
-    const countryInfo = countries.find((x) => x.cca2 === country)
+  if (geoCountry && !isApi && env.VERCEL_ENV === 'production') {
+    const countryInfo = countries.find((x) => x.cca2 === geoCountry)
     if (countryInfo) {
       const flag = countryInfo.flag
-      await redis.set(kvKeys.currentVisitor, { country, city, flag })
+      await redis.set(kvKeys.currentVisitor, {
+        country: geoCountry,
+        city: geoCity,
+        flag,
+      })
     }
   }
 
-  return NextResponse.next()
-}
-
-export default authMiddleware({
-  beforeAuth: beforeAuthMiddleware,
-  publicRoutes: [
-    '/',
-    '/studio(.*)',
-    '/api(.*)',
-    '/blog(.*)',
-    '/confirm(.*)',
-    '/projects',
-    '/guestbook',
-    '/newsletters(.*)',
-    '/about',
-    '/rss',
-    '/feed',
-    '/ama',
-    '/daynight-sounds',
-    '/daynight-sounds/privacy-policy',
-    '/91'
-  ],
+  if (!isPublicRoute(req)) {
+    await auth.protect()
+  }
 })

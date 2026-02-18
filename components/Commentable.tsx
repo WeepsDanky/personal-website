@@ -292,7 +292,7 @@ function Root({ className, blockId }: CommentableProps) {
                       <div className="flex justify-center">
                         <SignInButton
                           mode="modal"
-                          redirectUrl={url(pathname).href}
+                          forceRedirectUrl={url(pathname).href}
                         >
                           <Button type="button">
                             <UserArrowLeftIcon className="mr-1 h-5 w-5" />

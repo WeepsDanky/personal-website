@@ -1,3 +1,5 @@
+@reference "tailwindcss";
+
 .cl-card, .cl-userButtonPopoverCard {
   @apply backdrop-blur-xl backdrop-saturate-150 border shadow-xl shadow-zinc-500/10;
   @apply bg-zinc-50/80 text-zinc-800 border-zinc-200;

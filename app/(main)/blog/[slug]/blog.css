@@ -1,3 +1,5 @@
+@reference "tailwindcss";
+
 .comment__message {
   * {
     @apply leading-6;
@@ -47,7 +49,7 @@
   }
 
   pre > code {
-    @apply px-0 py-0 bg-transparent !important;
+    @apply !px-0 !py-0 !bg-transparent;
   }
 }
 
@@ -65,6 +67,6 @@
   }
 
   pre > code {
-    @apply bg-transparent !important;
+    @apply !bg-transparent;
   }
 }

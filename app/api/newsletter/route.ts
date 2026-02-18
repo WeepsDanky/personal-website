@@ -9,6 +9,7 @@ import { subscribers } from '~/db/schema'
 import ConfirmSubscriptionEmail from '~/emails/ConfirmSubscription'
 import { env } from '~/env.mjs'
 import { url } from '~/lib'
+import { getIP } from '~/lib/ip'
 import { resend } from '~/lib/mail'
 import { redis } from '~/lib/redis'
 
@@ -24,7 +25,7 @@ const ratelimit = new Ratelimit({
 
 export async function POST(req: NextRequest) {
   if (env.NODE_ENV === 'production') {
-    const { success } = await ratelimit.limit('subscribe_' + (req.ip ?? ''))
+    const { success } = await ratelimit.limit('subscribe_' + getIP(req))
     if (!success) {
       return NextResponse.error()
     }
@@ -50,7 +51,7 @@ export async function POST(req: NextRequest) {
       await resend.emails.send({
         from: emailConfig.from,
         to: parsed.email,
-        reply_to: emailConfig.reply_to,
+        replyTo: emailConfig.replyTo,
         subject: '来自 马克 的订阅确认',
         react: ConfirmSubscriptionEmail({
           link: url(`confirm/${token}`).href,

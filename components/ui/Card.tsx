@@ -1,5 +1,6 @@
 import { clsxm } from '@zolplay/utils'
 import Link, { type LinkProps } from 'next/link'
+import React from 'react'
 
 import { type IconProps } from '~/assets'
 
@@ -22,7 +23,7 @@ export function Card({
   children,
   ...props
 }: {
-  as?: keyof JSX.IntrinsicElements
+  as?: keyof React.JSX.IntrinsicElements
   className?: string
   children: React.ReactNode
   onMouseMove?: React.MouseEventHandler
@@ -60,7 +61,7 @@ Card.Title = function CardTitle({
   href,
   children,
 }: {
-  as?: keyof JSX.IntrinsicElements
+  as?: keyof React.JSX.IntrinsicElements
   href?: string
   children: React.ReactNode
 }) {
@@ -109,7 +110,7 @@ Card.Eyebrow = function CardEyebrow({
   children,
   ...props
 }: {
-  as?: keyof JSX.IntrinsicElements
+  as?: keyof React.JSX.IntrinsicElements
   decorate?: boolean
   className?: string
   children: React.ReactNode

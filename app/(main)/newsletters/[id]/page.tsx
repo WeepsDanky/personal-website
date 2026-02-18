@@ -1,7 +1,7 @@
 import { eq } from 'drizzle-orm'
 import { type Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { ReactMarkdown } from 'react-markdown/lib/react-markdown'
+import ReactMarkdown from 'react-markdown'
 
 import { Container } from '~/components/ui/Container'
 import { db } from '~/db'
@@ -20,8 +20,9 @@ async function getNewsletter(id: string) {
   return newsletter
 }
 
-export async function generateMetadata({ params }: { params: { id: string } }) {
-  const newsletter = await getNewsletter(params.id)
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+  const newsletter = await getNewsletter(id)
 
   const imageUrlRegex = /!\[[^\]]*\]\((.*?)\)/
   const match = newsletter.body?.match(imageUrlRegex)
@@ -54,9 +55,10 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
 export default async function NewsletterRenderPage({
   params,
 }: {
-  params: { id: string }
+  params: Promise<{ id: string }>
 }) {
-  const newsletter = await getNewsletter(params.id)
+  const { id } = await params
+  const newsletter = await getNewsletter(id)
 
   if (!newsletter.body) {
     return null

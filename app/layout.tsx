@@ -9,7 +9,7 @@ import Script from 'next/script'
 
 import { ThemeProvider } from '~/app/(main)/ThemeProvider'
 import { url } from '~/lib'
-import { zhCN } from '~/lib/clerkLocalizations'
+import { zhCN } from '@clerk/localizations'
 import { sansFont } from '~/lib/font'
 import { seo } from '~/lib/seo'
 

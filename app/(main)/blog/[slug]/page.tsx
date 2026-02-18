@@ -11,9 +11,10 @@ import { getBlogPost } from '~/sanity/queries'
 export const generateMetadata = async ({
   params,
 }: {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }) => {
-  const post = await getBlogPost(params.slug)
+  const { slug } = await params
+  const post = await getBlogPost(slug)
   if (!post) {
     notFound()
   }
@@ -51,9 +52,10 @@ export const generateMetadata = async ({
 export default async function BlogPage({
   params,
 }: {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }) {
-  const post = await getBlogPost(params.slug)
+  const { slug } = await params
+  const post = await getBlogPost(slug)
   if (!post) {
     notFound()
   }

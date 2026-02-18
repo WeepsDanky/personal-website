@@ -2,11 +2,12 @@ import cors from 'edge-cors'
 import { NextResponse } from 'next/server'
 import { getTweet } from 'react-tweet/api'
 
-type RouteSegment = { params: { id: string } }
+type RouteSegment = { params: Promise<{ id: string }> }
 
 export async function GET(req: Request, { params }: RouteSegment) {
   try {
-    const tweet = await getTweet(params.id)
+    const { id } = await params
+    const tweet = await getTweet(id)
     return cors(
       req,
       NextResponse.json({ data: tweet ?? null }, { status: tweet ? 200 : 404 })

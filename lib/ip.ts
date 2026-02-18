@@ -2,7 +2,7 @@ import { type NextRequest } from 'next/server'
 
 export function getIP(request: Request | NextRequest): string {
   if ('ip' in request && request.ip) {
-    return request.ip
+    return request.ip as string
   }
 
   const xff = request.headers.get('x-forwarded-for')

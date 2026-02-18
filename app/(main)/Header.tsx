@@ -319,7 +319,7 @@ function UserInfo() {
       case 'from_oauth_github':
         return GitHubBrandIcon as (
           props: React.ComponentProps<'svg'>
-        ) => JSX.Element
+        ) => React.JSX.Element
       case 'from_oauth_google':
         return GoogleBrandIcon
       default:
@@ -360,7 +360,7 @@ function UserInfo() {
         >
           <Tooltip.Provider disableHoverableContent>
             <Tooltip.Root open={tooltipOpen} onOpenChange={setTooltipOpen}>
-              <SignInButton mode="modal" redirectUrl={url(pathname).href}>
+              <SignInButton mode="modal" forceRedirectUrl={url(pathname).href}>
                 <Tooltip.Trigger asChild>
                   <button
                     type="button"

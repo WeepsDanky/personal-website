@@ -14,12 +14,13 @@ export const metadata = {
 export default async function ConfirmPage({
   params,
 }: {
-  params: { token: string }
+  params: Promise<{ token: string }>
 }) {
+  const { token } = await params
   const [subscriber] = await db
     .select()
     .from(subscribers)
-    .where(eq(subscribers.token, params.token))
+    .where(eq(subscribers.token, token))
 
   if (!subscriber || subscriber.subscribedAt) {
     redirect('/')
