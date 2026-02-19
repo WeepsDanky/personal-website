@@ -46,3 +46,6 @@ static/
 
 .react-email/
 /.idea
+
+# claude
+.claude/settings.local.json
