@@ -1,49 +1,14 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { useTranslations } from 'next-intl'
 import Balancer from 'react-wrap-balancer'
 
-// import { PeekabooLink } from '~/components/links/PeekabooLink'
 import { SocialLink } from '~/components/links/SocialLink'
 
-function Developer() {
-  return (
-    <span className="group">
-      <span className="font-mono">&lt;</span>开发者
-      <span className="font-mono">/&gt;</span>
-      <span className="invisible inline-flex text-zinc-300 before:content-['|'] group-hover:visible group-hover:animate-typing dark:text-zinc-500" />
-    </span>
-  ) 
-}
-
-function Physicist() {
-  return (
-    <span>
-      学物理的
-    </span>  
-  )
-}
-
-function Founder() {
-  return (
-    <span className="group">
-      <span>创始人</span>
-    </span>
-  )
-}
-
-// <SparkleIcon className="mr-1 inline-flex transform-gpu transition-transform duration-500 group-hover:rotate-180" /> 
-
-/* function Founder() {
-  return (
-    <span className="group">
-      <UserSecurityIcon className="mr-1 inline-flex group-hover:fill-zinc-600/20 dark:group-hover:fill-zinc-200/20" />
-      <span>创始人</span>
-    </span>
-  )
-} */
-
 export function Headline() {
+  const t = useTranslations('headline')
+
   return (
     <div className="max-w-2xl">
       <motion.h1
@@ -57,9 +22,7 @@ export function Headline() {
           duration: 0.3,
         }}
       >
-        <Developer />，<Physicist />，
-        <br />
-        <Founder />
+        {t('title')}
       </motion.h1>
       <motion.p
         className="mt-6 text-base text-zinc-600 dark:text-zinc-400"
@@ -74,7 +37,7 @@ export function Headline() {
         }}
       >
         <Balancer>
-          我是马克。我会在我的个人网站分享我的一些想法和作品。
+          {t('description')}
         </Balancer>
       </motion.p>
       <motion.div
@@ -91,33 +54,27 @@ export function Headline() {
       >
         <SocialLink
           href="https://marksun.co.uk/twitter"
-          aria-label="我的推特"
+          aria-label="Twitter"
           platform="twitter"
         />
-        {/* <SocialLink
-          href="https://cali.so/youtube"
-          aria-label="我的 YouTube"
-          platform="youtube"
-        /> */}
         <SocialLink
           href="https://marksun.co.uk/bilibili"
-          aria-label="我的 Bilibili"
+          aria-label="Bilibili"
           platform="bilibili"
         />
         <SocialLink
           href="https://marksun.co.uk/github"
-          aria-label="我的 GitHub"
+          aria-label="GitHub"
           platform="github"
         />
         <SocialLink
           href="https://marksun.co.uk/tg"
-          aria-label="我的 Telegram"
+          aria-label="Telegram"
           platform="telegram"
         />
-        {/* <SocialLink href="/feed.xml" platform="rss" aria-label="RSS 订阅" /> */}
         <SocialLink
           href="mailto:sxy.hj156@gmail.com"
-          aria-label="我的邮箱"
+          aria-label="Email"
           platform="mail"
         />
       </motion.div>

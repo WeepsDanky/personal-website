@@ -4,6 +4,10 @@
     "guestbook": "留言墙",
     "profile": "个人主页"
   },
+  "headline": {
+    "title": "你好，我是马克孙。",
+    "description": "帝国理工物理系在读，顺便造 AI Agent。这里记录我对 AI 的思考，偶尔也聊吉他、插画和游戏。"
+  },
   "home": {
     "recentPosts": "近期文章"
   },

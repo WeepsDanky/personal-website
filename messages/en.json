@@ -4,6 +4,10 @@
     "guestbook": "Guestbook",
     "profile": "Profile"
   },
+  "headline": {
+    "title": "Hi, I'm Mark Sun.",
+    "description": "Physics student at Imperial, AI agent developer on the side. I write about AI here, and occasionally about guitar, illustrations, and games."
+  },
   "home": {
     "recentPosts": "Recent Posts"
   },
