@@ -1,4 +1,5 @@
 import { count, isNotNull } from 'drizzle-orm'
+import { getTranslations } from 'next-intl/server'
 import Link from 'next/link'
 import React from 'react'
 
@@ -32,12 +33,13 @@ function NavLink({
   )
 }
 
-function Links() {
+async function Links() {
+  const t = await getTranslations('nav')
   return (
     <nav className="flex gap-6 text-sm font-medium text-zinc-800 dark:text-zinc-200">
-      {navigationItems.map(({ href, text }) => (
+      {navigationItems.map(({ href, key }) => (
         <NavLink key={href} href={href}>
-          {text}
+          {t(key)}
         </NavLink>
       ))}
     </nav>

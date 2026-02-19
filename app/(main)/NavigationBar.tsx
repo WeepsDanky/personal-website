@@ -3,6 +3,7 @@
 import { Popover, type PopoverProps, Transition } from '@headlessui/react'
 import { clsxm } from '@zolplay/utils'
 import { motion, useMotionTemplate, useMotionValue } from 'framer-motion'
+import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React from 'react'
@@ -45,6 +46,7 @@ function Desktop({
   className,
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) {
+  const t = useTranslations('nav')
   const mouseX = useMotionValue(0)
   const mouseY = useMotionValue(0)
   const radius = useMotionValue(0)
@@ -80,9 +82,9 @@ function Desktop({
       />
 
       <ul className="flex bg-transparent px-3 text-sm font-medium text-zinc-800 dark:text-zinc-200 ">
-        {navigationItems.map(({ href, text }) => (
+        {navigationItems.map(({ href, key }) => (
           <NavItem key={href} href={href}>
-            {text}
+            {t(key)}
           </NavItem>
         ))}
       </ul>
@@ -107,10 +109,11 @@ function MobileNavItem({
 }
 
 function Mobile(props: PopoverProps<'div'>) {
+  const t = useTranslations('nav')
   return (
     <Popover {...props}>
       <Popover.Button className="group flex items-center rounded-full bg-gradient-to-b from-zinc-50/20 to-white/80 px-4 py-2 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur-md focus:outline-none focus-visible:ring-2 dark:from-zinc-900/30 dark:to-zinc-800/80 dark:text-zinc-200 dark:ring-white/10 dark:hover:ring-white/20 dark:focus-visible:ring-yellow-500/80">
-        前往
+        {t('home')}
         {/* Chevron */}
         <svg
           viewBox="0 0 8 6"
@@ -174,9 +177,9 @@ function Mobile(props: PopoverProps<'div'>) {
             </div>
             <nav className="mt-6">
               <ul className="-my-2 divide-y divide-zinc-500/20 text-base text-zinc-800 dark:divide-zinc-100/5 dark:text-zinc-300">
-                {navigationItems.map(({ href, text }) => (
+                {navigationItems.map(({ href, key }) => (
                   <MobileNavItem key={href} href={href}>
-                    {text}
+                    {t(key)}
                   </MobileNavItem>
                 ))}
               </ul>

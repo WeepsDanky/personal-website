@@ -3,13 +3,15 @@ import './clerk.css'
 import './prism.css'
 
 import { ClerkProvider } from '@clerk/nextjs'
+import { zhCN } from '@clerk/localizations'
 import { GoogleAnalytics } from '@next/third-parties/google'
 import { type Metadata } from 'next'
+import { NextIntlClientProvider } from 'next-intl'
+import { getLocale, getMessages } from 'next-intl/server'
 import Script from 'next/script'
 
 import { ThemeProvider } from '~/app/(main)/ThemeProvider'
 import { url } from '~/lib'
-import { zhCN } from '@clerk/localizations'
 import { sansFont } from '~/lib/font'
 import { seo } from '~/lib/seo'
 
@@ -71,17 +73,30 @@ export const viewport = {
   userScalable: 0,
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const GA_TRACKING_ID = "G-YTGR38JKLX"; // Replace with your actual GA ID
+  const GA_TRACKING_ID = "G-YTGR38JKLX"
+  const locale = await getLocale()
+  const messages = await getMessages()
+  const htmlLang = locale === 'zh' ? 'zh-CN' : 'en'
 
   return (
-    <ClerkProvider localization={zhCN}>
+    <ClerkProvider
+      localization={locale === 'zh' ? zhCN : undefined}
+      signInUrl="/sign-in"
+      signUpUrl="/sign-up"
+      appearance={{
+        layout: {
+          socialButtonsPlacement: 'top',
+          socialButtonsVariant: 'blockButton',
+        },
+      }}
+    >
       <html
-        lang="zh-CN"
+        lang={htmlLang}
         className={`${sansFont.variable} m-0 h-full p-0 font-sans antialiased`}
         suppressHydrationWarning
       >
@@ -105,14 +120,16 @@ export default function RootLayout({
           }}
         />
         <body className="flex h-full flex-col">
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            {children}
-          </ThemeProvider>
+          <NextIntlClientProvider locale={locale} messages={messages}>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              {children}
+            </ThemeProvider>
+          </NextIntlClientProvider>
         </body>
         <GoogleAnalytics gaId="G-YTGR38JKLX" />
       </html>

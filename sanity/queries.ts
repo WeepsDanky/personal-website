@@ -32,7 +32,6 @@ export const getLatestBlogPostsQuery = ({
     title,
     "slug": slug.current,
     "categories": categories[]->title,
-    description,
     publishedAt,
     readingTime,
     mainImage {
@@ -41,7 +40,7 @@ export const getLatestBlogPostsQuery = ({
         url,
         ${
           forDisplay
-            ? '"lqip": metadata.lqip, "dominant": metadata.palette.dominant,'
+            ? '"lqip": metadata.lqip, "dominant": metadata.palette.dominant, "dimensions": metadata.dimensions,'
             : ''
         }
       }
@@ -56,7 +55,6 @@ export const getBlogPostQuery = groq`
     title,
     "slug": slug.current,
     "categories": categories[]->title,
-    description,
     publishedAt,
     readingTime,
     mood,
@@ -74,7 +72,8 @@ export const getBlogPostQuery = groq`
       _ref,
       asset->{
         url,
-        "lqip": metadata.lqip
+        "lqip": metadata.lqip,
+        "dimensions": metadata.dimensions
       }
     },
     "related": *[_type == "post" && slug.current != $slug && count(categories[@._ref in ^.^.categories[]._ref]) > 0] | order(publishedAt desc, _createdAt desc) [0..2] {

@@ -2,6 +2,26 @@ import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
 import { get } from '@vercel/edge-config'
 import { type NextRequest, NextResponse } from 'next/server'
 
+import { defaultLocale, locales, type Locale } from '~/i18n/config'
+
+function getLocaleFromRequest(req: NextRequest): Locale {
+  const cookieLocale = req.cookies.get('NEXT_LOCALE')?.value as
+    | Locale
+    | undefined
+  if (cookieLocale && locales.includes(cookieLocale)) {
+    return cookieLocale
+  }
+  const acceptLanguage = req.headers.get('accept-language') ?? ''
+  const preferred = acceptLanguage
+    .split(',')[0]
+    ?.split('-')[0]
+    ?.toLowerCase() as Locale | undefined
+  if (preferred && locales.includes(preferred)) {
+    return preferred
+  }
+  return defaultLocale
+}
+
 import { kvKeys } from '~/config/kv'
 import { env } from '~/env.mjs'
 import countries from '~/lib/countries.json'
@@ -9,7 +29,12 @@ import { getIP } from '~/lib/ip'
 import { redis } from '~/lib/redis'
 
 export const config = {
-  matcher: ['/((?!_next|studio|.*\\..*).*)'],
+  matcher: [
+    // Skip Next.js internals and all static files, unless found in search params
+    '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
+    // Always run for API routes
+    '/(api|trpc)(.*)',
+  ],
 }
 
 const isPublicRoute = createRouteMatcher([
@@ -19,6 +44,7 @@ const isPublicRoute = createRouteMatcher([
   '/blog(.*)',
   '/confirm(.*)',
   '/projects',
+  '/profile',
   '/guestbook',
   '/newsletters(.*)',
   '/about',
@@ -74,4 +100,16 @@ export default clerkMiddleware(async (auth, req: NextRequest) => {
   if (!isPublicRoute(req)) {
     await auth.protect()
   }
+
+  // Persist detected locale in cookie so server components can read it
+  const locale = getLocaleFromRequest(req)
+  const response = NextResponse.next()
+  if (!req.cookies.get('NEXT_LOCALE')) {
+    response.cookies.set('NEXT_LOCALE', locale, {
+      path: '/',
+      maxAge: 60 * 60 * 24 * 365,
+      sameSite: 'lax',
+    })
+  }
+  return response
 })

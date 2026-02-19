@@ -1,0 +1,21 @@
+{
+  "nav": {
+    "home": "首页",
+    "guestbook": "留言墙",
+    "profile": "个人主页"
+  },
+  "home": {
+    "recentPosts": "近期文章"
+  },
+  "profile": {
+    "title": "个人主页"
+  },
+  "guestbook": {
+    "title": "留言墙"
+  },
+  "footer": {
+    "builtWith": "使用 Cali Castle 开源模板建立：",
+    "totalViews": "总浏览量",
+    "lastVisitor": "最近访客来自"
+  }
+}

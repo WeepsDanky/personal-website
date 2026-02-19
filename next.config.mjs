@@ -1,11 +1,23 @@
+import { fileURLToPath } from 'url'
+import path from 'path'
+import createNextIntlPlugin from 'next-intl/plugin'
+
 /**
  * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation.
  * This is especially useful for Docker builds.
  */
 !process.env.SKIP_ENV_VALIDATION && (await import('./env.mjs'))
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+
+const withNextIntl = createNextIntlPlugin('./i18n/request.ts')
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  turbopack: {
+    root: __dirname,
+  },
+
   images: {
     remotePatterns: [
       {
@@ -57,6 +69,11 @@ const nextConfig = {
         "source": "/bilibili",
         "destination": "https://space.bilibili.com/351590373",
         "permanent": true
+      },
+      {
+        "source": "/blog",
+        "destination": "/",
+        "permanent": true
       }
     ]
   },
@@ -79,4 +96,4 @@ const nextConfig = {
   },
 }
 
-export default nextConfig
+export default withNextIntl(nextConfig)

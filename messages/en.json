@@ -1,0 +1,21 @@
+{
+  "nav": {
+    "home": "Home",
+    "guestbook": "Guestbook",
+    "profile": "Profile"
+  },
+  "home": {
+    "recentPosts": "Recent Posts"
+  },
+  "profile": {
+    "title": "Profile"
+  },
+  "guestbook": {
+    "title": "Guestbook"
+  },
+  "footer": {
+    "builtWith": "Built with Cali Castle's open-source template:",
+    "totalViews": "Total views",
+    "lastVisitor": "Last visitor from"
+  }
+}

@@ -19,10 +19,17 @@ export const Post = z.object({
           foreground: z.string(),
         })
         .optional(),
+      dimensions: z
+        .object({
+          width: z.number(),
+          height: z.number(),
+          aspectRatio: z.number(),
+        })
+        .optional(),
     }),
   }),
   publishedAt: z.string(),
-  description: z.string(),
+  description: z.string().optional(),
   categories: z.array(z.string()).optional(),
   body: z.any(),
   readingTime: z.number(),
@@ -48,12 +55,35 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: 'body',
+      title: '内容',
+      type: 'blockContent',
+    }),
+    defineField({
+      name: 'mainImage',
+      title: '主图',
+      type: 'image',
+      description: '文章封面图。将作为博客卡片的封面展示，支持任意尺寸与比例。/ Cover image for the post. Displayed as the blog card cover. Any size and aspect ratio accepted.',
+      options: {
+        hotspot: true,
+      },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: 'slug',
       title: '链接标识符',
       type: 'slug',
       options: {
         source: 'title',
         maxLength: 96,
+        slugify: (input: string) =>
+          input
+            ? input
+                .toLowerCase()
+                .replace(/\s+/g, '-')
+                .replace(/[^\w-]/g, '')
+                .slice(0, 96)
+            : crypto.randomUUID(),
       },
       validation: (Rule) => Rule.required(),
     }),
@@ -68,28 +98,6 @@ export default defineType({
       title: '发布时间',
       type: 'datetime',
       validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: 'mainImage',
-      title: '主图',
-      type: 'image',
-      description: 'This image will be used for the preview (1200 x 675px)',
-      options: {
-        hotspot: true,
-      },
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: 'description',
-      title: '简介',
-      type: 'text',
-      rows: 3,
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: 'body',
-      title: '内容',
-      type: 'blockContent',
     }),
     defineField({
       name: 'readingTime',
@@ -112,19 +120,6 @@ export default defineType({
         ],
         layout: 'radio',
       },
-    }),
-    defineField({
-      name: 'language',
-      title: '语言',
-      type: 'string',
-      options: {
-        list: [
-          { title: 'English', value: 'en' },
-          { title: 'Chinese', value: 'zh' },
-        ],
-        layout: 'radio',
-      },
-      validation: (Rule) => Rule.required(),
     }),
   ],
 

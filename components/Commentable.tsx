@@ -101,7 +101,12 @@ function Root({ className, blockId }: CommentableProps) {
     }, 300)
   }, [])
 
-  const { mutate: createComment, isLoading } = useMutation(
+  const {
+    mutate: createComment,
+    isLoading,
+    error: mutationError,
+    reset: resetMutation,
+  } = useMutation(
     ['comment', postId],
     async (comment: string) => {
       const res = await fetch(`/api/comments/${postId}`, {
@@ -117,6 +122,14 @@ function Root({ className, blockId }: CommentableProps) {
           parentId: blogPostState.replyingTo?.id,
         }),
       })
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}))
+        throw new Error(
+          typeof errorData.error === 'string'
+            ? errorData.error
+            : '评论发送失败，请稍后再试'
+        )
+      }
       const data: CommentDto = await res.json()
       return data
     },
@@ -285,8 +298,15 @@ function Root({ className, blockId }: CommentableProps) {
                       <CommentTextarea
                         isLoading={isLoading}
                         onSubmit={onSubmit}
+                        onInputChange={resetMutation}
                       />
                     </SignedIn>
+
+                    {mutationError instanceof Error && (
+                      <p className="text-xs text-red-500">
+                        {mutationError.message}
+                      </p>
+                    )}
 
                     <SignedOut>
                       <div className="flex justify-center">
@@ -433,8 +453,9 @@ Comment.displayName = 'Commentable.Comment'
 type CommentTextareaProps = {
   isLoading?: boolean
   onSubmit?: (comment: string) => void
+  onInputChange?: () => void
 }
-function CommentTextarea({ isLoading, onSubmit }: CommentTextareaProps) {
+function CommentTextarea({ isLoading, onSubmit, onInputChange }: CommentTextareaProps) {
   const { user: me } = useUser()
   const textareaRef = React.useRef<HTMLTextAreaElement>(null)
   const [comment, setComment] = React.useState('')
@@ -522,7 +543,10 @@ function CommentTextarea({ isLoading, onSubmit }: CommentTextareaProps) {
                 : '留下你的评论吧...'
             }
             value={comment}
-            onChange={(e) => setComment(e.target.value)}
+            onChange={(e) => {
+              setComment(e.target.value)
+              onInputChange?.()
+            }}
             onKeyDown={onKeydown}
             disabled={isLoading}
             maxRows={8}
