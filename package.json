@@ -55,7 +55,6 @@
     "@vercel/edge-config": "^1.4.3",
     "@zolplay/react": "^0.5.1",
     "@zolplay/utils": "^1.3.4",
-    "cheerio": "1.2.0",
     "dayjs": "^1.11.19",
     "dotenv": "^17.3.1",
     "drizzle-orm": "^0.45.1",

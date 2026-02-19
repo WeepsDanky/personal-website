@@ -1,4 +1,3 @@
-import * as cheerio from 'cheerio'
 import { ImageResponse } from 'next/og'
 import { type NextRequest, NextResponse } from 'next/server'
 
@@ -87,13 +86,21 @@ export async function GET(req: NextRequest) {
 
     if (res.ok) {
       const html = await res.text()
-      const $ = cheerio.load(html)
-      const appleTouchIcon = $('link[rel="apple-touch-icon"]').attr('href')
-      const favicon = $('link[rel="icon"]').attr('href')
-      const shortcutFavicon = $('link[rel="shortcut icon"]').attr('href')
-      const finalFavicon = appleTouchIcon ?? favicon ?? shortcutFavicon
-      if (finalFavicon) {
-        iconUrl = new URL(finalFavicon, new URL(`https://${url}`).href).href
+      const baseUrl = new URL(`https://${url}`).href
+      const patterns = [
+        /<link[^>]+rel=["']apple-touch-icon["'][^>]*href=["']([^"']+)["']/i,
+        /<link[^>]+href=["']([^"']+)["'][^>]*rel=["']apple-touch-icon["']/i,
+        /<link[^>]+rel=["']icon["'][^>]*href=["']([^"']+)["']/i,
+        /<link[^>]+href=["']([^"']+)["'][^>]*rel=["']icon["']/i,
+        /<link[^>]+rel=["']shortcut icon["'][^>]*href=["']([^"']+)["']/i,
+        /<link[^>]+href=["']([^"']+)["'][^>]*rel=["']shortcut icon["']/i,
+      ]
+      for (const pattern of patterns) {
+        const match = html.match(pattern)
+        if (match?.[1]) {
+          iconUrl = new URL(match[1], baseUrl).href
+          break
+        }
       }
     }
 
