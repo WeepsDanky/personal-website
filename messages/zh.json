@@ -11,6 +11,33 @@
   "home": {
     "recentPosts": "近期文章"
   },
+  "resume": {
+    "heading": "工作经历",
+    "srCompany": "公司",
+    "srRole": "职位",
+    "srDate": "日期",
+    "dateTo": "到",
+    "entries": {
+      "imperial": {
+        "company": "帝国理工学院 物理",
+        "title": "学生",
+        "start": "2022",
+        "end": "2026"
+      },
+      "miracleplus": {
+        "company": "奇绩创坛",
+        "title": "数据分析实习生",
+        "start": "2023年7月",
+        "end": "2023年9月"
+      },
+      "dify": {
+        "company": "Dify.AI",
+        "title": "开发者关系与创新",
+        "start": "2024年1月",
+        "end": "2024年11月"
+      }
+    }
+  },
   "profile": {
     "title": "个人主页"
   },

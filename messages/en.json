@@ -11,6 +11,33 @@
   "home": {
     "recentPosts": "Recent Posts"
   },
+  "resume": {
+    "heading": "Experience",
+    "srCompany": "Company",
+    "srRole": "Role",
+    "srDate": "Date",
+    "dateTo": "to",
+    "entries": {
+      "imperial": {
+        "company": "Imperial College London, Physics",
+        "title": "Student",
+        "start": "2022",
+        "end": "2026"
+      },
+      "miracleplus": {
+        "company": "MiraclePlus",
+        "title": "Data Analyst Intern",
+        "start": "Jun 2023",
+        "end": "Sep 2023"
+      },
+      "dify": {
+        "company": "Dify.AI",
+        "title": "Developer Relations & Innovation",
+        "start": "Jan 2024",
+        "end": "Nov 2024"
+      }
+    }
+  },
   "profile": {
     "title": "Profile"
   },
