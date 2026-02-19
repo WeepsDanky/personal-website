@@ -12,6 +12,7 @@ import {
   MailIcon,
   TelegramIcon,
   TwitterIcon,
+  XiaohongshuIcon,
   YouTubeIcon,
 } from '~/assets'
 import { Tooltip } from '~/components/ui/Tooltip'
@@ -23,6 +24,7 @@ type Platform =
   | 'youtube'
   | 'telegram'
   | 'bilibili'
+  | 'xiaohongshu'
   | 'mail'
   | 'rss'
 type PlatformInfo = {
@@ -52,6 +54,11 @@ const iconMapper: { [key: string]: PlatformInfo } = {
     icon: BilibiliIcon,
     platform: 'bilibili',
     label: '哔哩哔哩',
+  },
+  '(?:xiaohongshu.com)': {
+    icon: XiaohongshuIcon,
+    platform: 'xiaohongshu',
+    label: '小红书',
   },
   '(?:mailto:)': { icon: MailIcon, platform: 'mail', label: '邮箱地址' },
   '(?:feed.xml)': { icon: AtomIcon, platform: 'rss', label: 'RSS 订阅' },

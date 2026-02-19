@@ -73,6 +73,11 @@ export function Headline() {
           platform="telegram"
         />
         <SocialLink
+          href="https://www.xiaohongshu.com/user/profile/62b84b350000000019022dc5"
+          aria-label="小红书"
+          platform="xiaohongshu"
+        />
+        <SocialLink
           href="mailto:sxy.hj156@gmail.com"
           aria-label="Email"
           platform="mail"
