@@ -12,7 +12,7 @@ export function BlogPostCard({ post }: { post: Post; views: number }) {
     <Link
       href={`/blog/${slug}`}
       prefetch={false}
-      className="group mb-4 flex break-inside-avoid flex-col overflow-hidden rounded-2xl transform-gpu transition-transform hover:-translate-y-0.5"
+      className="group flex flex-col overflow-hidden rounded-2xl transform-gpu transition-transform hover:-translate-y-0.5"
     >
       <Image
         src={url}
