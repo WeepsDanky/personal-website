@@ -10,7 +10,7 @@ export default function HomePage() {
         <h2 className="mb-4 text-sm font-semibold uppercase tracking-widest text-zinc-400 dark:text-zinc-500">
           Writing
         </h2>
-        <div className="columns-2 gap-4 sm:columns-3">
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
           <BlogPosts limit={40} />
         </div>
       </div>
