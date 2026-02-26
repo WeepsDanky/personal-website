@@ -44,7 +44,7 @@ export default function Layout({
               />
               <Text className="text-center">
                 <Link
-                  href="https://marksun.co.uk/"
+                  href="https://marksun.net/"
                   className="text-zinc-700 underline"
                 >
                   <strong>马克孙</strong>
@@ -54,28 +54,28 @@ export default function Layout({
               </Text>
               <Text className="text-center">
                 <Link
-                  href="https://marksun.co.uk/twitter"
+                  href="https://marksun.net/twitter"
                   className="text-xs text-zinc-600 underline"
                 >
                   Twitter
                 </Link>{' '}
                 |&nbsp;
                 <Link
-                  href="https://marksun.co.uk/youtube"
+                  href="https://marksun.net/youtube"
                   className="text-xs text-zinc-600 underline"
                 >
                   YouTube
                 </Link>{' '}
                 |&nbsp;
                 <Link
-                  href="https://marksun.co.uk/github"
+                  href="https://marksun.net/github"
                   className="text-xs text-zinc-600 underline"
                 >
                   GitHub
                 </Link>{' '}
                 |&nbsp;
                 <Link
-                  href="https://marksun.co.uk/bilibili"
+                  href="https://marksun.net/bilibili"
                   className="text-xs text-zinc-600 underline"
                 >
                   哔哩哔哩

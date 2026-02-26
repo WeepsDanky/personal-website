@@ -18,7 +18,7 @@ No test suite is configured.
 
 ## Architecture
 
-This is a Next.js 16 App Router personal blog/portfolio site (marksun.co.uk).
+This is a Next.js 16 App Router personal blog/portfolio site (marksun.net).
 
 ### Route Structure
 

@@ -53,22 +53,22 @@ export function Headline() {
         }}
       >
         <SocialLink
-          href="https://marksun.co.uk/twitter"
+          href="https://marksun.net/twitter"
           aria-label="Twitter"
           platform="twitter"
         />
         <SocialLink
-          href="https://marksun.co.uk/bilibili"
+          href="https://marksun.net/bilibili"
           aria-label="Bilibili"
           platform="bilibili"
         />
         <SocialLink
-          href="https://marksun.co.uk/github"
+          href="https://marksun.net/github"
           aria-label="GitHub"
           platform="github"
         />
         <SocialLink
-          href="https://marksun.co.uk/tg"
+          href="https://marksun.net/tg"
           aria-label="Telegram"
           platform="telegram"
         />
