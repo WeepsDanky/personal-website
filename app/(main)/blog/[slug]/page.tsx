@@ -20,24 +20,17 @@ export const generateMetadata = async ({
   }
 
   const { title, mainImage } = post
+  const ogImage = mainImage?.asset?.url
 
   return {
     title,
     openGraph: {
       title,
-      images: [
-        {
-          url: mainImage.asset.url,
-        },
-      ],
+      ...(ogImage ? { images: [{ url: ogImage }] } : {}),
       type: 'article',
     },
     twitter: {
-      images: [
-        {
-          url: mainImage.asset.url,
-        },
-      ],
+      ...(ogImage ? { images: [{ url: ogImage }] } : {}),
       title,
       card: 'summary_large_image',
       site: '@marksun111',

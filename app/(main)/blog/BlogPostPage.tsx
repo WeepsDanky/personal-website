@@ -16,6 +16,7 @@ import {
   UTurnLeftIcon,
 } from '~/assets'
 import { ClientOnly } from '~/components/ClientOnly'
+import { GeneratedCover } from '~/components/GeneratedCover'
 import { PostPortableText } from '~/components/PostPortableText'
 import { Prose } from '~/components/Prose'
 import { Button } from '~/components/ui/Button'
@@ -65,15 +66,22 @@ export function BlogPostPage({
                   damping: 20,
                 }}
               >
-                <Image
-                  src={post.mainImage.asset.url}
-                  alt={post.title}
-                  width={post.mainImage.asset.dimensions?.width ?? 1200}
-                  height={post.mainImage.asset.dimensions?.height ?? 675}
-                  className="h-auto w-full select-none rounded-2xl ring-1 ring-zinc-900/5 transition dark:ring-0 dark:ring-white/10 dark:hover:border-zinc-700 dark:hover:ring-white/20 md:rounded-3xl"
-                  placeholder={post.mainImage.asset.lqip ? 'blur' : 'empty'}
-                  blurDataURL={post.mainImage.asset.lqip}
-                />
+                {post.mainImage?.asset?.url ? (
+                  <Image
+                    src={post.mainImage.asset.url}
+                    alt={post.title}
+                    width={post.mainImage.asset.dimensions?.width ?? 1200}
+                    height={post.mainImage.asset.dimensions?.height ?? 630}
+                    className="h-auto w-full select-none rounded-2xl ring-1 ring-zinc-900/5 transition dark:ring-0 dark:ring-white/10 dark:hover:border-zinc-700 dark:hover:ring-white/20 md:rounded-3xl"
+                    placeholder={post.mainImage.asset.lqip ? 'blur' : 'empty'}
+                    blurDataURL={post.mainImage.asset.lqip}
+                  />
+                ) : (
+                  <GeneratedCover
+                    title={post.title}
+                    className="select-none rounded-2xl ring-1 ring-zinc-900/5 transition dark:ring-0 dark:ring-white/10 dark:hover:border-zinc-700 dark:hover:ring-white/20 md:rounded-3xl w-full"
+                  />
+                )}
               </motion.div>
               <motion.div
                 className="flex w-full items-center space-x-4 text-sm font-medium text-zinc-600/80 dark:text-zinc-400/80"

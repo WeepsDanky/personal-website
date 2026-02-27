@@ -2,32 +2,36 @@ import { defineField, defineType } from 'sanity'
 import { z } from 'zod'
 
 import { PencilSwooshIcon } from '~/assets'
+import { MarkdownBodyInput } from '~/sanity/components/MarkdownBodyInput'
 import { readingTimeType } from '~/sanity/schemas/types/readingTime'
 
 export const Post = z.object({
   _id: z.string(),
   title: z.string(),
   slug: z.string(),
-  mainImage: z.object({
-    _ref: z.string(),
-    asset: z.object({
-      url: z.string(),
-      lqip: z.string().optional(),
-      dominant: z
-        .object({
-          background: z.string(),
-          foreground: z.string(),
-        })
-        .optional(),
-      dimensions: z
-        .object({
-          width: z.number(),
-          height: z.number(),
-          aspectRatio: z.number(),
-        })
-        .optional(),
-    }),
-  }),
+  mainImage: z
+    .object({
+      _ref: z.string(),
+      asset: z.object({
+        url: z.string(),
+        lqip: z.string().optional(),
+        dominant: z
+          .object({
+            background: z.string(),
+            foreground: z.string(),
+          })
+          .optional(),
+        dimensions: z
+          .object({
+            width: z.number(),
+            height: z.number(),
+            aspectRatio: z.number(),
+          })
+          .optional(),
+      }),
+    })
+    .optional()
+    .nullable(),
   publishedAt: z.string(),
   description: z.string().optional(),
   categories: z.array(z.string()).optional(),
@@ -58,16 +62,19 @@ export default defineType({
       name: 'body',
       title: '内容',
       type: 'blockContent',
+      components: {
+        input: MarkdownBodyInput,
+      },
     }),
     defineField({
       name: 'mainImage',
       title: '主图',
       type: 'image',
-      description: '文章封面图。将作为博客卡片的封面展示，支持任意尺寸与比例。/ Cover image for the post. Displayed as the blog card cover. Any size and aspect ratio accepted.',
+      description:
+        '文章封面图（可选）。未上传时将根据标题自动生成渐变封面。/ Cover image (optional). A gradient cover is auto-generated from the title when not provided.',
       options: {
         hotspot: true,
       },
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'slug',
