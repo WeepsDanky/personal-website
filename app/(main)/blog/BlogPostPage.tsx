@@ -38,13 +38,13 @@ export function BlogPostPage({
 }) {
   return (
     <Container className="mt-16 lg:mt-32">
-      <div className="w-full md:flex md:justify-between xl:relative">
+      <div className="w-full md:flex md:gap-8 xl:relative">
         <aside className="hidden w-[160px] shrink-0 lg:block">
           <div className="sticky top-2 pt-20">
             <BlogPostTableOfContents headings={post.headings} />
           </div>
         </aside>
-        <div className="max-w-2xl md:flex-1 md:shrink-0">
+        <div className="min-w-0 md:flex-1">
           <Button
             href="/blog"
             variant="secondary"
@@ -151,12 +151,11 @@ export function BlogPostPage({
                 </span>
               </motion.div>
             </header>
-            <Prose className="mt-8">
+            <Prose className="mt-8 max-w-none">
               <PostPortableText value={post.body} />
             </Prose>
           </article>
         </div>
-        <div className="hidden w-[160px] shrink-0 lg:block" />
       </div>
 
       {post.related && post.related.length > 0 ? (
