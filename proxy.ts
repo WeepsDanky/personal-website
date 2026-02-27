@@ -112,7 +112,4 @@ export default clerkMiddleware(async (auth, req: NextRequest) => {
     })
   }
   return response
-}, {
-  signInUrl: '/sign-in',
-  signUpUrl: '/sign-up',
 })
