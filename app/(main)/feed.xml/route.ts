@@ -28,9 +28,9 @@ export async function GET() {
       url: `${seo.url.href}blog/${post.slug}`,
       description: post.description,
       date: new Date(post.publishedAt),
-      enclosure: {
-        url: post.mainImage.asset.url,
-      },
+      ...(post.mainImage?.asset?.url
+        ? { enclosure: { url: post.mainImage.asset.url } }
+        : {}),
     })
   })
 
