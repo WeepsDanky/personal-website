@@ -1,7 +1,7 @@
 export const seo = {
   title: '马克孙 | 物理学生,创始人,开发者',
   description:
-    '我是孙霄逸，你可以叫我马克。一名物理学生，梦想家。我希望我的创造物日后可以改变世界。',
+    '帝国理工物理系在读，顺便造 AI Agent。这里记录我对 AI 的思考，偶尔也聊吉他、插画和游戏。',
   url: new URL(
     process.env.NODE_ENV === 'production'
       ? 'https://marksun.net'
