@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     siteName: '马克孙',
     locale: 'zh_CN',
     type: 'website',
-    url: 'https://mark.sun.co.uk',
+    url: 'https://marksun.net',
   },
   twitter: {
     site: '@marksun111',
